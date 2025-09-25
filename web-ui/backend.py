@@ -81,27 +81,27 @@ def upload_file():
         # Process the PDF using our converter
         if HDFCConverter is not None:
             # Use full converter if available
-            print(f"Using full HDFCConverter for: {temp_pdf_path}")
+            print("Using full HDFCConverter for PDF processing")
             try:
                 converter = HDFCConverter(temp_pdf_path, temp_dir)
                 result = converter.convert()
-                print(f"Full converter result: {result}")
+                print("Full converter processing completed")
             except Exception as e:
-                print(f"Full converter failed: {e}")
+                print(f"Full converter failed: {type(e).__name__}")
                 # Fall back to simple converter
                 if SimpleHDFCConverter is not None:
-                    print(f"Falling back to SimpleHDFCConverter")
+                    print("Falling back to SimpleHDFCConverter")
                     converter = SimpleHDFCConverter(temp_pdf_path, temp_dir)
                     result = converter.convert()
-                    print(f"Simple converter result: {result}")
+                    print("Simple converter processing completed")
                 else:
                     return jsonify({'error': f'PDF processing failed: {str(e)}'}), 500
         elif SimpleHDFCConverter is not None:
             # Use simple converter as fallback
-            print(f"Using SimpleHDFCConverter fallback for: {temp_pdf_path}")
+            print("Using SimpleHDFCConverter fallback for PDF processing")
             converter = SimpleHDFCConverter(temp_pdf_path, temp_dir)
             result = converter.convert()
-            print(f"Simple converter result: {result}")
+            print("Simple converter processing completed")
         else:
             return jsonify({'error': 'PDF processing not available. Please use the command line version.'}), 500
         
@@ -139,6 +139,13 @@ def upload_file():
                 'session_id': os.path.basename(temp_dir)  # Use temp dir name as session ID
             })
         else:
+            # Clean up temp files on failure
+            try:
+                import shutil
+                shutil.rmtree(temp_dir)
+                print("Cleaned up temporary files after processing failure")
+            except:
+                pass
             return jsonify({'error': result.get('error', 'PDF processing failed')}), 500
             
     except Exception as e:
@@ -183,7 +190,19 @@ def download_file(session_id, file_type):
                     break
         
         if file_path and os.path.exists(file_path):
-            return send_file(file_path, as_attachment=True, download_name=filename, mimetype=mime_type)
+            # Schedule cleanup of temp directory after download
+            def cleanup_after_response(response):
+                try:
+                    import shutil
+                    shutil.rmtree(temp_dir)
+                    print("Cleaned up temporary files after download")
+                except:
+                    pass
+                return response
+            
+            response = send_file(file_path, as_attachment=True, download_name=filename, mimetype=mime_type)
+            response.call_on_close(lambda: cleanup_after_response(response))
+            return response
         else:
             return jsonify({'error': f'{file_type} file not found'}), 404
             

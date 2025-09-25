@@ -45,6 +45,53 @@ header p {
     opacity: 0.9;
 }
 
+/* Privacy Disclaimer */
+.privacy-disclaimer {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #4CAF50;
+}
+
+.disclaimer-content h3 {
+    color: #2E7D32;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.disclaimer-content h3 i {
+    color: #4CAF50;
+}
+
+.disclaimer-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.disclaimer-content li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.disclaimer-content li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.disclaimer-content strong {
+    color: #2E7D32;
+}
+
 /* Main content */
 main {
     flex: 1;
