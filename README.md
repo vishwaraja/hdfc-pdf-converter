@@ -2,6 +2,8 @@
 
 A robust, open-source tool to extract transaction data from HDFC Bank PDF statements and convert them to CSV format with automatic categorization and detailed analysis.
 
+> 📖 **Read the full story**: [Building a PDF Parser for HDFC Bank Statements: From 165 Pages to CSV in Minutes](https://dev.to/vishwaraja_pathivishwa/building-a-pdf-parser-for-hdfc-bank-statements-from-165-pages-to-csv-in-minutes-34c6) on Dev.to
+
 ## 🚀 Features
 
 - **Complete Transaction Extraction**: Extracts all transactions from HDFC Bank PDF statements
@@ -258,7 +260,12 @@ If you encounter any issues or have questions:
 
 1. Check the [troubleshooting section](#-troubleshooting)
 2. Open an [issue](https://github.com/vishwarajapathi/hdfc-pdf-converter/issues)
-3. Contact: vishwarajapathi@example.com
+3. Contact: vishwaraja.pathi@adiyogitech.com
+
+## 📖 Related Content
+
+- **Technical Article**: [Building a PDF Parser for HDFC Bank Statements: From 165 Pages to CSV in Minutes](https://dev.to/vishwaraja_pathivishwa/building-a-pdf-parser-for-hdfc-bank-statements-from-165-pages-to-csv-in-minutes-34c6) on Dev.to
+- **Author**: [@vishwaraja_pathivishwa](https://dev.to/vishwaraja_pathivishwa) on Dev.to
 
 ## 🔄 Version History
 
