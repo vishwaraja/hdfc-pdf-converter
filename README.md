@@ -22,16 +22,24 @@ pip install hdfc-pdf-converter
 
 ## 🌐 Web Interface
 
+**🚀 Live Demo: [https://pdf2csv.in](https://pdf2csv.in)**
+
 For non-technical users, we provide a beautiful web interface where you can:
 - Drag and drop your PDF file
 - Watch real-time processing progress
 - Download CSV, Excel, and summary files
-- Run locally with the backend server
+- Use the live demo or run locally with the backend server
 
 ## 📖 Usage
 
 ### Web Interface (Recommended for most users)
 
+**Option 1: Use Live Demo (Easiest)**
+1. **Visit**: [https://pdf2csv.in](https://pdf2csv.in)
+2. **Upload PDF**: Drag and drop your HDFC PDF statement
+3. **Download Results**: Get your CSV, Excel, and summary files
+
+**Option 2: Run Locally**
 1. **Install Dependencies**: `pip install -r web-ui/requirements.txt`
 2. **Start Server**: `cd web-ui && python start_server.py`
 3. **Open Browser**: Go to `http://localhost:5000`
