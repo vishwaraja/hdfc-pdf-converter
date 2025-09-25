@@ -2,6 +2,13 @@
 let uploadedFile = null;
 let processingInterval = null;
 
+// Google Analytics helper function
+function trackEvent(eventName, parameters = {}) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, parameters);
+    }
+}
+
 // DOM elements
 const uploadArea = document.getElementById('uploadArea');
 const fileInput = document.getElementById('fileInput');
@@ -14,6 +21,13 @@ const processingStatus = document.getElementById('processingStatus');
 // Event listeners
 document.addEventListener('DOMContentLoaded', function() {
     setupEventListeners();
+    
+    // Track page load
+    trackEvent('page_view', {
+        'event_category': 'engagement',
+        'event_label': 'hdfc_converter_homepage',
+        'value': 1
+    });
 });
 
 function setupEventListeners() {
@@ -30,6 +44,28 @@ function setupEventListeners() {
     document.getElementById('downloadCsv').addEventListener('click', () => downloadFile('csv'));
     document.getElementById('downloadExcel').addEventListener('click', () => downloadFile('excel'));
     document.getElementById('downloadSummary').addEventListener('click', () => downloadFile('summary'));
+    
+    // Track external link clicks
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+        link.addEventListener('click', function() {
+            const url = this.href;
+            let label = 'external_link';
+            
+            if (url.includes('github.com')) {
+                label = 'github_link';
+            } else if (url.includes('dev.to')) {
+                label = 'devto_article';
+            } else if (url.includes('pdf2csv.in')) {
+                label = 'live_demo';
+            }
+            
+            trackEvent('external_link_click', {
+                'event_category': 'engagement',
+                'event_label': label,
+                'value': 1
+            });
+        });
+    });
 }
 
 // Drag and drop handlers
@@ -66,14 +102,31 @@ function handleFile(file) {
     // Validate file type
     if (file.type !== 'application/pdf') {
         showError('Please select a valid PDF file.');
+        trackEvent('file_validation_error', {
+            'event_category': 'error',
+            'event_label': 'invalid_file_type',
+            'value': 1
+        });
         return;
     }
     
     // Validate file size (50MB limit)
     if (file.size > 50 * 1024 * 1024) {
         showError('File size must be less than 50MB.');
+        trackEvent('file_validation_error', {
+            'event_category': 'error',
+            'event_label': 'file_too_large',
+            'value': Math.round(file.size / (1024 * 1024)) // Size in MB
+        });
         return;
     }
+    
+    // Track successful file upload
+    trackEvent('pdf_upload', {
+        'event_category': 'conversion',
+        'event_label': 'hdfc_pdf',
+        'value': Math.round(file.size / (1024 * 1024)) // File size in MB
+    });
     
     uploadedFile = file;
     startProcessing();
@@ -137,6 +190,15 @@ function showResults(stats) {
     document.getElementById('transactionCount').textContent = stats.transaction_count.toLocaleString();
     document.getElementById('pageCount').textContent = stats.page_count.toLocaleString();
     document.getElementById('categoryCount').textContent = stats.category_count.toLocaleString();
+    
+    // Track successful conversion
+    trackEvent('conversion_success', {
+        'event_category': 'conversion',
+        'event_label': 'hdfc_pdf',
+        'value': stats.transaction_count,
+        'custom_parameter_1': stats.page_count,
+        'custom_parameter_2': stats.category_count
+    });
 }
 
 // Show error section
@@ -145,6 +207,13 @@ function showError(message) {
     errorSection.style.display = 'block';
     errorSection.classList.add('fade-in');
     document.getElementById('errorMessage').textContent = message;
+    
+    // Track conversion errors
+    trackEvent('conversion_error', {
+        'event_category': 'error',
+        'event_label': 'processing_failed',
+        'value': 1
+    });
 }
 
 // Hide all sections
@@ -163,6 +232,13 @@ function downloadFile(type) {
         showError('No processed data available. Please upload and process a PDF first.');
         return;
     }
+    
+    // Track download event
+    trackEvent('file_download', {
+        'event_category': 'download',
+        'event_label': type,
+        'value': 1
+    });
     
     // Download the actual processed file
     const sessionId = window.sessionData.session_id;
