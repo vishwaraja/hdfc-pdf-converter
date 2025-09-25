@@ -27,6 +27,17 @@ except Exception as e:
     print(f"Error importing HDFCConverter: {e}")
     HDFCConverter = None
 
+# Fallback to simple converter
+try:
+    from simple_converter import SimpleHDFCConverter
+    print("Successfully imported SimpleHDFCConverter as fallback")
+except ImportError as e:
+    print(f"Warning: Could not import SimpleHDFCConverter: {e}")
+    SimpleHDFCConverter = None
+except Exception as e:
+    print(f"Error importing SimpleHDFCConverter: {e}")
+    SimpleHDFCConverter = None
+
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
 
@@ -68,14 +79,16 @@ def upload_file():
         file.save(temp_pdf_path)
         
         # Process the PDF using our converter
-        if HDFCConverter is None:
+        if HDFCConverter is not None:
+            # Use full converter if available
+            converter = HDFCConverter(temp_pdf_path, temp_dir)
+            result = converter.convert()
+        elif SimpleHDFCConverter is not None:
+            # Use simple converter as fallback
+            converter = SimpleHDFCConverter(temp_pdf_path, temp_dir)
+            result = converter.convert()
+        else:
             return jsonify({'error': 'PDF processing not available. Please use the command line version.'}), 500
-        
-        # Create converter instance
-        converter = HDFCConverter(temp_pdf_path, temp_dir)
-        
-        # Process the PDF
-        result = converter.convert()
         
         if result['success']:
             # Read the generated CSV to get transaction count
@@ -164,7 +177,12 @@ def download_file(session_id, file_type):
 
 @app.route('/health')
 def health():
-    return jsonify({'status': 'healthy', 'converter_available': HDFCConverter is not None})
+    return jsonify({
+        'status': 'healthy', 
+        'converter_available': HDFCConverter is not None or SimpleHDFCConverter is not None,
+        'full_converter_available': HDFCConverter is not None,
+        'simple_converter_available': SimpleHDFCConverter is not None
+    })
 
 @app.route('/debug')
 def debug():
