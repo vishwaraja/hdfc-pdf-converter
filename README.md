@@ -171,12 +171,27 @@ hdfc-pdf-converter/
 │   ├── script.js             # Frontend JavaScript
 │   ├── backend.py            # Flask backend
 │   ├── start_server.py       # Server startup script
+│   ├── README.md             # Web UI documentation
 │   └── requirements.txt      # Web UI dependencies
 ├── examples/                  # Usage examples
+│   ├── example_usage.py      # Example code
+│   └── README.md             # Examples documentation
 ├── tests/                     # Unit tests
+│   ├── __init__.py
+│   └── test_converter.py
 ├── docs/                      # Documentation
+│   ├── CONTRIBUTING.md       # Contribution guidelines
+│   ├── CODE_OF_CONDUCT.md    # Code of conduct
+│   ├── CI_CD_SETUP.md        # CI/CD setup guide
+│   ├── INSTALLATION.md       # Installation guide
+│   └── USAGE.md              # Usage documentation
 ├── scripts/                   # Utility scripts
-├── Dockerfile                 # Docker configuration
+│   ├── check_domain.py       # Domain verification
+│   └── check_domain_status.py # Domain status checker
+├── README.md                  # Main project documentation
+├── CHANGELOG.md              # Project changelog
+├── LICENSE                   # MIT License
+├── Dockerfile                # Docker configuration
 ├── railway.json              # Railway deployment config
 ├── setup.py                  # Package setup
 └── requirements.txt           # Python dependencies
@@ -184,7 +199,7 @@ hdfc-pdf-converter/
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions! Please see our [Contributing Guide](docs/CONTRIBUTING.md) for details.
 
 ### Development Setup
 
