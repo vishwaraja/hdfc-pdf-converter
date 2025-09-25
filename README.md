@@ -181,7 +181,41 @@ python src/hdfc_converter.py statement.pdf --verbose
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions from the community! Here's how you can help:
+
+### 🚀 **Ways to Contribute**
+
+- **🐛 Bug Reports**: Found a bug? Please report it using our [bug report template](.github/ISSUE_TEMPLATE/bug_report.md)
+- **💡 Feature Requests**: Have an idea? Use our [feature request template](.github/ISSUE_TEMPLATE/feature_request.md)
+- **📝 Documentation**: Help improve our docs, examples, or README
+- **🧪 Testing**: Test with different PDF formats and report issues
+- **🔧 Code**: Submit pull requests for bug fixes or new features
+
+### 🛠️ **Development Setup**
+
+1. **Fork the repository**
+2. **Clone your fork**: `git clone https://github.com/your-username/hdfc-pdf-converter.git`
+3. **Create a branch**: `git checkout -b feature/your-feature-name`
+4. **Install dependencies**: `pip install -r requirements.txt`
+5. **Make your changes**
+6. **Run tests**: `pytest tests/`
+7. **Submit a pull request**
+
+### 📋 **Contribution Guidelines**
+
+- Follow our [Code of Conduct](CODE_OF_CONDUCT.md)
+- Read our [Contributing Guide](CONTRIBUTING.md)
+- Use our [Pull Request Template](.github/pull_request_template.md)
+- Ensure all tests pass
+- Update documentation for new features
+
+### 🏷️ **Good First Issues**
+
+Look for issues labeled with:
+- `good first issue` - Perfect for newcomers
+- `help wanted` - Community help needed
+- `documentation` - Documentation improvements
+- `bug` - Bug fixes needed
 
 ### Development Setup
 
