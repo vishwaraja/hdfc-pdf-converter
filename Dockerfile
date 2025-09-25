@@ -1,5 +1,5 @@
-# Use Python 3.11 (more stable with camelot-py than 3.12)
-FROM python:3.11-slim
+# Use Python 3.11 with Ubuntu base (more stable for system packages)
+FROM python:3.11-slim-bullseye
 
 # Set working directory
 WORKDIR /app
@@ -30,10 +30,6 @@ RUN apt-get update && apt-get install -y \
     libv4l-dev \
     libxvidcore-dev \
     libx264-dev \
-    libjpeg-dev \
-    libpng-dev \
-    libtiff-dev \
-    libatlas-base-dev \
     gfortran \
     wget \
     && rm -rf /var/lib/apt/lists/*
