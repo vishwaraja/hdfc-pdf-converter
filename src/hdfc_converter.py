@@ -392,13 +392,12 @@ def main():
 Examples:
   python hdfc_converter.py statement.pdf
   python hdfc_converter.py statement.pdf --output-dir ./results
-  python hdfc_converter.py --default
+  python hdfc_converter.py /path/to/statements/hdfc_2024.pdf --verbose
         """
     )
     
     parser.add_argument(
         'pdf_path',
-        nargs='?',
         help='Path to the HDFC PDF statement file'
     )
     
@@ -406,12 +405,6 @@ Examples:
         '--output-dir', '-o',
         default='output',
         help='Output directory for CSV files (default: output)'
-    )
-    
-    parser.add_argument(
-        '--default',
-        action='store_true',
-        help='Use default PDF path (hdfc_bank_statement_unprotected.pdf)'
     )
     
     parser.add_argument(
@@ -426,17 +419,8 @@ Examples:
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
     
-    # Determine PDF path
-    if args.default:
-        pdf_path = 'hdfc_bank_statement_unprotected.pdf'
-        if not os.path.exists(pdf_path):
-            logger.error(f"Default PDF file not found: {pdf_path}")
-            sys.exit(1)
-    elif args.pdf_path:
-        pdf_path = args.pdf_path
-    else:
-        parser.print_help()
-        sys.exit(1)
+    # Use the provided PDF path
+    pdf_path = args.pdf_path
     
     try:
         # Create converter and run conversion

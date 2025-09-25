@@ -37,6 +37,7 @@ def example_basic_usage():
     except FileNotFoundError:
         print(f"❌ PDF file not found: {pdf_path}")
         print("Please provide a valid HDFC Bank PDF statement.")
+        print("Usage: python src/hdfc_converter.py your_statement.pdf")
     except Exception as e:
         print(f"❌ Error: {e}")
 
@@ -165,6 +166,6 @@ if __name__ == "__main__":
     print("\n" + "=" * 50)
     print("Examples completed!")
     print("\nTo use the converter:")
-    print("1. Place your HDFC PDF statement in the project directory")
-    print("2. Run: python src/hdfc_converter.py your_statement.pdf")
-    print("3. Check the 'output' directory for results")
+    print("1. Run: python src/hdfc_converter.py your_statement.pdf")
+    print("2. Check the 'output' directory for results")
+    print("3. Use --help for more options: python src/hdfc_converter.py --help")

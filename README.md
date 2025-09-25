@@ -54,27 +54,26 @@ pip install hdfc-pdf-converter
 # Convert a PDF statement
 python src/hdfc_converter.py your_statement.pdf
 
-# Use default PDF file
-python src/hdfc_converter.py --default
-
 # Specify output directory
 python src/hdfc_converter.py statement.pdf --output-dir ./results
 
 # Enable verbose logging
 python src/hdfc_converter.py statement.pdf --verbose
+
+# Convert PDF from different directory
+python src/hdfc_converter.py /path/to/statements/hdfc_2024.pdf
 ```
 
 ### Command Line Options
 
 ```bash
-python src/hdfc_converter.py [PDF_PATH] [OPTIONS]
+python src/hdfc_converter.py PDF_PATH [OPTIONS]
 
 Arguments:
-  PDF_PATH              Path to the HDFC PDF statement file
+  PDF_PATH              Path to the HDFC PDF statement file (required)
 
 Options:
   -o, --output-dir DIR  Output directory for CSV files (default: output)
-  --default             Use default PDF path (hdfc_bank_statement_unprotected.pdf)
   -v, --verbose         Enable verbose logging
   -h, --help            Show help message
 ```

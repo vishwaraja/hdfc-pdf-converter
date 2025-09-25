@@ -26,23 +26,22 @@ This guide provides detailed instructions on how to use the HDFC PDF to CSV Conv
 # Convert a PDF statement
 python src/hdfc_converter.py statement.pdf
 
-# Use default PDF file
-python src/hdfc_converter.py --default
-
 # Specify custom output directory
 python src/hdfc_converter.py statement.pdf --output-dir ./my_results
 
 # Enable verbose logging
 python src/hdfc_converter.py statement.pdf --verbose
+
+# Convert PDF from different directory
+python src/hdfc_converter.py /path/to/statements/hdfc_2024.pdf
 ```
 
 ### Command Line Options
 
 | Option | Description | Example |
 |--------|-------------|---------|
-| `PDF_PATH` | Path to HDFC PDF statement | `statement.pdf` |
+| `PDF_PATH` | Path to HDFC PDF statement (required) | `statement.pdf` |
 | `-o, --output-dir` | Output directory for CSV files | `--output-dir ./results` |
-| `--default` | Use default PDF path | `--default` |
 | `-v, --verbose` | Enable verbose logging | `--verbose` |
 | `-h, --help` | Show help message | `--help` |
 
@@ -58,8 +57,8 @@ python src/hdfc_converter.py bank_statement.pdf -o ./converted_data
 # Verbose output for debugging
 python src/hdfc_converter.py bank_statement.pdf --verbose
 
-# Use default PDF file
-python src/hdfc_converter.py --default
+# Convert PDF from different directory
+python src/hdfc_converter.py /path/to/statements/hdfc_2024.pdf
 
 # Get help
 python src/hdfc_converter.py --help
