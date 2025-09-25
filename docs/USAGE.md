@@ -15,7 +15,7 @@ This guide provides detailed instructions on how to use the HDFC PDF to CSV Conv
    ```
 
 3. **Check results**
-   - Output files will be created in the `output` directory
+   - Output files will be created in the `results` directory
    - Review the generated CSV and summary files
 
 ## Command Line Usage
@@ -41,7 +41,7 @@ python src/hdfc_converter.py /path/to/statements/hdfc_2024.pdf
 | Option | Description | Example |
 |--------|-------------|---------|
 | `PDF_PATH` | Path to HDFC PDF statement (required) | `statement.pdf` |
-| `-o, --output-dir` | Output directory for CSV files | `--output-dir ./results` |
+| `-o, --output-dir` | Output directory for CSV files (default: results) | `--output-dir ./my_results` |
 | `-v, --verbose` | Enable verbose logging | `--verbose` |
 | `-h, --help` | Show help message | `--help` |
 
@@ -52,7 +52,7 @@ python src/hdfc_converter.py /path/to/statements/hdfc_2024.pdf
 python src/hdfc_converter.py bank_statement.pdf
 
 # Custom output directory
-python src/hdfc_converter.py bank_statement.pdf -o ./converted_data
+python src/hdfc_converter.py bank_statement.pdf -o ./my_results
 
 # Verbose output for debugging
 python src/hdfc_converter.py bank_statement.pdf --verbose

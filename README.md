@@ -55,7 +55,7 @@ pip install hdfc-pdf-converter
 python src/hdfc_converter.py your_statement.pdf
 
 # Specify output directory
-python src/hdfc_converter.py statement.pdf --output-dir ./results
+python src/hdfc_converter.py statement.pdf --output-dir ./my_results
 
 # Enable verbose logging
 python src/hdfc_converter.py statement.pdf --verbose
@@ -73,7 +73,7 @@ Arguments:
   PDF_PATH              Path to the HDFC PDF statement file (required)
 
 Options:
-  -o, --output-dir DIR  Output directory for CSV files (default: output)
+  -o, --output-dir DIR  Output directory for CSV files (default: results)
   -v, --verbose         Enable verbose logging
   -h, --help            Show help message
 ```

@@ -403,8 +403,8 @@ Examples:
     
     parser.add_argument(
         '--output-dir', '-o',
-        default='output',
-        help='Output directory for CSV files (default: output)'
+        default='results',
+        help='Output directory for CSV files (default: results)'
     )
     
     parser.add_argument(

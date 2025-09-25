@@ -167,5 +167,5 @@ if __name__ == "__main__":
     print("Examples completed!")
     print("\nTo use the converter:")
     print("1. Run: python src/hdfc_converter.py your_statement.pdf")
-    print("2. Check the 'output' directory for results")
+    print("2. Check the 'results' directory for results")
     print("3. Use --help for more options: python src/hdfc_converter.py --help")
