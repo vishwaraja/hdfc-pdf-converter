@@ -362,7 +362,10 @@ class HDFCConverter:
             
             if not transactions:
                 logger.error("No transactions found in the PDF!")
-                return False
+                return {
+                    'success': False,
+                    'error': 'No transactions found in the PDF'
+                }
             
             # Categorize transactions
             categorized_transactions = self.categorize_transactions(transactions)
@@ -376,11 +379,20 @@ class HDFCConverter:
             logger.info("Conversion completed successfully!")
             logger.info(f"Output files saved in: {self.output_dir}")
             
-            return True
+            return {
+                'success': True,
+                'csv_file': str(output_files['transactions_file']),
+                'excel_file': str(output_files['excel_file']),
+                'summary_file': str(output_files['summary_file']),
+                'pages_processed': len(page_stats)
+            }
             
         except Exception as e:
             logger.error(f"Conversion failed: {e}")
-            return False
+            return {
+                'success': False,
+                'error': str(e)
+            }
 
 
 def main():

@@ -68,10 +68,10 @@ def upload_file():
             return jsonify({'error': 'PDF processing not available. Please use the command line version.'}), 500
         
         # Create converter instance
-        converter = HDFCConverter()
+        converter = HDFCConverter(temp_pdf_path, temp_dir)
         
         # Process the PDF
-        result = converter.convert_pdf(temp_pdf_path, temp_dir)
+        result = converter.convert()
         
         if result['success']:
             # Read the generated CSV to get transaction count
