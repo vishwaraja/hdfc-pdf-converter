@@ -165,4 +165,9 @@ def health():
 if __name__ == '__main__':
     print("Starting HDFC PDF Converter Web Backend...")
     print(f"HDFCConverter available: {HDFCConverter is not None}")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    
+    # Get port from environment (Railway sets this)
+    port = int(os.environ.get('PORT', 5000))
+    debug = os.environ.get('FLASK_ENV') == 'development'
+    
+    app.run(debug=debug, host='0.0.0.0', port=port)
