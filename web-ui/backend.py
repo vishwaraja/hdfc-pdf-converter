@@ -19,8 +19,12 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 try:
     from hdfc_converter import HDFCConverter
-except ImportError:
-    print("Warning: Could not import HDFCConverter. Make sure the src directory is available.")
+    print("Successfully imported HDFCConverter")
+except ImportError as e:
+    print(f"Warning: Could not import HDFCConverter: {e}")
+    HDFCConverter = None
+except Exception as e:
+    print(f"Error importing HDFCConverter: {e}")
     HDFCConverter = None
 
 app = Flask(__name__)
@@ -161,6 +165,32 @@ def download_file(session_id, file_type):
 @app.route('/health')
 def health():
     return jsonify({'status': 'healthy', 'converter_available': HDFCConverter is not None})
+
+@app.route('/debug')
+def debug():
+    import_info = {
+        'converter_available': HDFCConverter is not None,
+        'pandas_available': False,
+        'camelot_available': False,
+        'error_details': None
+    }
+    
+    try:
+        import pandas as pd
+        import_info['pandas_available'] = True
+    except Exception as e:
+        import_info['error_details'] = f"Pandas import failed: {e}"
+    
+    try:
+        import camelot
+        import_info['camelot_available'] = True
+    except Exception as e:
+        if import_info['error_details']:
+            import_info['error_details'] += f"; Camelot import failed: {e}"
+        else:
+            import_info['error_details'] = f"Camelot import failed: {e}"
+    
+    return jsonify(import_info)
 
 @app.route('/')
 def root():
