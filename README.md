@@ -16,8 +16,25 @@ A robust, open-source tool to extract transaction data from HDFC Bank PDF statem
 
 ## 📦 Installation
 
+### Option 1: Clone and Install (Recommended)
+
 ```bash
-pip install hdfc-pdf-converter
+# Clone the repository
+git clone https://github.com/vishwaraja/hdfc-pdf-converter.git
+cd hdfc-pdf-converter
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Option 2: Direct Download
+
+```bash
+# Download and extract the latest release
+wget https://github.com/vishwaraja/hdfc-pdf-converter/archive/main.zip
+unzip main.zip
+cd hdfc-pdf-converter-main
+pip install -r requirements.txt
 ```
 
 ## 🌐 Web Interface
@@ -87,11 +104,13 @@ from src.hdfc_converter import HDFCConverter
 converter = HDFCConverter()
 
 # Convert PDF to CSV
-result = converter.convert_pdf('statement.pdf', 'output_dir')
+result = converter.convert('statement.pdf', 'output_dir')
 
 if result['success']:
     print(f"Extracted {result['transaction_count']} transactions")
     print(f"CSV saved to: {result['csv_file']}")
+    print(f"Excel saved to: {result['excel_file']}")
+    print(f"Summary saved to: {result['summary_file']}")
 else:
     print(f"Error: {result['error']}")
 ```
@@ -102,8 +121,9 @@ The converter generates several output files:
 
 - **`hdfc_transactions_YYYYMMDD_HHMMSS.csv`**: Complete transaction data
 - **`hdfc_transactions_YYYYMMDD_HHMMSS.xlsx`**: Excel version with formatting
-- **`extraction_summary_YYYYMMDD_HHMMSS.md`**: Detailed analysis report
-- **`head_wise_analysis_YYYYMMDD_HHMMSS.csv`**: Category-wise breakdown
+- **`EXTRACTION_REPORT_YYYYMMDD_HHMMSS.md`**: Detailed analysis report
+- **`summary_YYYYMMDD_HHMMSS.csv`**: Category-wise breakdown
+- **`extraction_stats_YYYYMMDD_HHMMSS.csv`**: Processing statistics
 
 ## 🎯 Transaction Categories
 
@@ -150,10 +170,15 @@ hdfc-pdf-converter/
 │   ├── styles.css            # CSS styling
 │   ├── script.js             # Frontend JavaScript
 │   ├── backend.py            # Flask backend
-│   └── start_server.py       # Server startup script
+│   ├── start_server.py       # Server startup script
+│   └── requirements.txt      # Web UI dependencies
 ├── examples/                  # Usage examples
 ├── tests/                     # Unit tests
 ├── docs/                      # Documentation
+├── scripts/                   # Utility scripts
+├── Dockerfile                 # Docker configuration
+├── railway.json              # Railway deployment config
+├── setup.py                  # Package setup
 └── requirements.txt           # Python dependencies
 ```
 
@@ -183,7 +208,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **GitHub Issues**: [Report bugs or request features](https://github.com/vishwaraja/hdfc-pdf-converter/issues)
 - **Email**: vishwaraja.pathi@adiyogitech.com
-- **Technical Article**: [Read the full story on Dev.to](https://dev.to/34c6)
+- **Technical Article**: [Read the full story on Dev.to](https://dev.to/vishwaraja_pathivishwa/building-a-pdf-parser-for-hdfc-bank-statements-from-165-pages-to-csv-in-minutes-34c6)
 
 ## 📖 Related Content
 

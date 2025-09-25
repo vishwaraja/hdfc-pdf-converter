@@ -30,10 +30,10 @@ setup(
     description="A robust tool to extract transaction data from HDFC Bank PDF statements and convert them to CSV format",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/vishwarajapathi/hdfc-pdf-converter",
+    url="https://github.com/vishwaraja/hdfc-pdf-converter",
     project_urls={
-        "Bug Tracker": "https://github.com/vishwarajapathi/hdfc-pdf-converter/issues",
-        "Documentation": "https://github.com/vishwarajapathi/hdfc-pdf-converter#readme",
+        "Bug Tracker": "https://github.com/vishwaraja/hdfc-pdf-converter/issues",
+        "Documentation": "https://github.com/vishwaraja/hdfc-pdf-converter#readme",
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
