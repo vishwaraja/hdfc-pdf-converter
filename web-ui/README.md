@@ -11,25 +11,17 @@ A beautiful, responsive web interface for the HDFC PDF to CSV Converter. This al
 - **Responsive Design**: Works perfectly on desktop, tablet, and mobile
 - **Modern UI**: Beautiful gradient design with smooth animations
 
-## 🚀 Live Demo
+## 🚀 Usage
 
-**GitHub Pages (Demo Mode)**: [https://vishwaraja.github.io/hdfc-pdf-converter/](https://vishwaraja.github.io/hdfc-pdf-converter/)
-
-**Local Server (Full Processing)**: Run the backend server locally for real PDF processing
+**Local Server**: Run the backend server locally for PDF processing
 
 ## 📱 How to Use
 
-### Option 1: GitHub Pages (Demo Mode)
-1. **Visit**: [https://vishwaraja.github.io/hdfc-pdf-converter/](https://vishwaraja.github.io/hdfc-pdf-converter/)
-2. **Upload PDF**: Drag and drop your HDFC PDF statement
-3. **Download Sample**: Get sample CSV with demo data
-
-### Option 2: Local Server (Full Processing)
 1. **Install Dependencies**: `pip install -r requirements.txt`
 2. **Start Server**: `python start_server.py`
 3. **Open Browser**: Go to `http://localhost:5000`
 4. **Upload PDF**: Drag and drop your HDFC PDF statement
-5. **Download Real Data**: Get your actual CSV with all transactions
+5. **Download Results**: Get your actual CSV with all transactions
 
 ## 🛠️ Technical Details
 
