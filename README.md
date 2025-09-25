@@ -46,7 +46,26 @@ pip install -e .
 pip install hdfc-pdf-converter
 ```
 
+## 🌐 Web Interface
+
+**Try the live demo**: [https://vishwaraja.github.io/hdfc-pdf-converter/](https://vishwaraja.github.io/hdfc-pdf-converter/)
+
+For non-technical users, we provide a beautiful web interface where you can:
+- Drag and drop your PDF file
+- Watch real-time processing progress
+- Download CSV, Excel, and summary files
+- No installation required!
+
 ## 📖 Usage
+
+### Web Interface (Recommended for most users)
+
+1. Visit [https://vishwaraja.github.io/hdfc-pdf-converter/](https://vishwaraja.github.io/hdfc-pdf-converter/)
+2. Drag and drop your HDFC PDF statement
+3. Wait for processing to complete
+4. Download your CSV, Excel, and summary files
+
+### Command Line Interface
 
 ### Basic Usage
 

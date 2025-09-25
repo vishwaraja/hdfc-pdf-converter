@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDFC PDF to CSV Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-file-pdf"></i> HDFC PDF to CSV Converter</h1>
+            <p>Convert your HDFC Bank PDF statements to CSV format with automatic categorization</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drop your HDFC PDF here</h3>
+                        <p>or <span class="browse-link">browse files</span></p>
+                        <input type="file" id="fileInput" accept=".pdf" hidden>
+                        <small>Supports PDF files up to 50MB</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="processing-section" id="processingSection" style="display: none;">
+                <div class="processing-content">
+                    <div class="spinner"></div>
+                    <h3>Processing your PDF...</h3>
+                    <p id="processingStatus">Extracting transactions...</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-content">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Conversion Complete!</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number" id="transactionCount">0</span>
+                            <span class="stat-label">Transactions</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="pageCount">0</span>
+                            <span class="stat-label">Pages</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="categoryCount">0</span>
+                            <span class="stat-label">Categories</span>
+                        </div>
+                    </div>
+                    <div class="download-buttons">
+                        <button class="btn btn-primary" id="downloadCsv">
+                            <i class="fas fa-download"></i> Download CSV
+                        </button>
+                        <button class="btn btn-secondary" id="downloadExcel">
+                            <i class="fas fa-file-excel"></i> Download Excel
+                        </button>
+                        <button class="btn btn-secondary" id="downloadSummary">
+                            <i class="fas fa-file-alt"></i> Download Summary
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-section" id="errorSection" style="display: none;">
+                <div class="error-content">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Conversion Failed</h3>
+                    <p id="errorMessage">An error occurred while processing your PDF.</p>
+                    <button class="btn btn-primary" onclick="resetForm()">Try Again</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://github.com/vishwaraja/hdfc-pdf-converter" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://dev.to/34c6" target="_blank">
+                        <i class="fas fa-blog"></i> Technical Article
+                    </a>
+                    <a href="mailto:vishwaraja.pathi@adiyogitech.com">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </div>
+                <p>&copy; 2025 Vishwaraja Pathi. Made with ❤️ for the HDFC Bank community.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
