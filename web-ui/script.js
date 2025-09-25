@@ -79,36 +79,45 @@ function handleFile(file) {
     startProcessing();
 }
 
-// Processing simulation
+// Real PDF processing
 function startProcessing() {
     showProcessing();
     
-    // Simulate processing steps
-    const steps = [
-        { text: 'Uploading PDF...', progress: 10 },
-        { text: 'Extracting tables...', progress: 30 },
-        { text: 'Processing transactions...', progress: 60 },
-        { text: 'Categorizing data...', progress: 80 },
-        { text: 'Generating CSV...', progress: 95 },
-        { text: 'Complete!', progress: 100 }
-    ];
+    // Create FormData for file upload
+    const formData = new FormData();
+    formData.append('file', uploadedFile);
     
-    let currentStep = 0;
+    // Update progress
+    processingStatus.textContent = 'Uploading PDF...';
+    progressFill.style.width = '10%';
     
-    processingInterval = setInterval(() => {
-        if (currentStep < steps.length) {
-            const step = steps[currentStep];
-            processingStatus.textContent = step.text;
-            progressFill.style.width = step.progress + '%';
-            currentStep++;
-        } else {
-            clearInterval(processingInterval);
-            // Simulate successful processing
+    // Upload and process the file
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update progress
+            processingStatus.textContent = 'Processing complete!';
+            progressFill.style.width = '100%';
+            
+            // Store session data
+            window.sessionData = data;
+            
+            // Show results with real data
             setTimeout(() => {
-                showResults();
+                showResults(data.stats);
             }, 500);
+        } else {
+            showError(data.error || 'Processing failed');
         }
-    }, 1000);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showError('Network error: ' + error.message);
+    });
 }
 
 // Show processing section
@@ -119,15 +128,15 @@ function showProcessing() {
 }
 
 // Show results section
-function showResults() {
+function showResults(stats) {
     hideAllSections();
     resultsSection.style.display = 'block';
     resultsSection.classList.add('fade-in');
     
-    // Simulate results data
-    document.getElementById('transactionCount').textContent = '3,602';
-    document.getElementById('pageCount').textContent = '165';
-    document.getElementById('categoryCount').textContent = '22';
+    // Display real results data
+    document.getElementById('transactionCount').textContent = stats.transaction_count.toLocaleString();
+    document.getElementById('pageCount').textContent = stats.page_count.toLocaleString();
+    document.getElementById('categoryCount').textContent = stats.category_count.toLocaleString();
 }
 
 // Show error section
@@ -150,42 +159,22 @@ function hideAllSections() {
 
 // Download file function
 function downloadFile(type) {
-    if (!uploadedFile) {
-        showError('No file uploaded.');
+    if (!window.sessionData || !window.sessionData.session_id) {
+        showError('No processed data available. Please upload and process a PDF first.');
         return;
     }
     
-    // Create sample data based on type
-    let content, filename, mimeType;
+    // Download the actual processed file
+    const sessionId = window.sessionData.session_id;
+    const downloadUrl = `/download/${sessionId}/${type}`;
     
-    switch (type) {
-        case 'csv':
-            content = generateSampleCSV();
-            filename = 'hdfc_transactions.csv';
-            mimeType = 'text/csv';
-            break;
-        case 'excel':
-            content = generateSampleCSV(); // For demo, using CSV content
-            filename = 'hdfc_transactions.xlsx';
-            mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-            break;
-        case 'summary':
-            content = generateSampleSummary();
-            filename = 'hdfc_summary.md';
-            mimeType = 'text/markdown';
-            break;
-    }
-    
-    // Create and trigger download
-    const blob = new Blob([content], { type: mimeType });
-    const url = window.URL.createObjectURL(blob);
+    // Create a temporary link and trigger download
     const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
+    a.href = downloadUrl;
+    a.download = ''; // Let the server determine the filename
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
 }
 
 // Generate sample CSV data
