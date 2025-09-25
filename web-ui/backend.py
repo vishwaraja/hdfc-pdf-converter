@@ -81,12 +81,27 @@ def upload_file():
         # Process the PDF using our converter
         if HDFCConverter is not None:
             # Use full converter if available
-            converter = HDFCConverter(temp_pdf_path, temp_dir)
-            result = converter.convert()
+            print(f"Using full HDFCConverter for: {temp_pdf_path}")
+            try:
+                converter = HDFCConverter(temp_pdf_path, temp_dir)
+                result = converter.convert()
+                print(f"Full converter result: {result}")
+            except Exception as e:
+                print(f"Full converter failed: {e}")
+                # Fall back to simple converter
+                if SimpleHDFCConverter is not None:
+                    print(f"Falling back to SimpleHDFCConverter")
+                    converter = SimpleHDFCConverter(temp_pdf_path, temp_dir)
+                    result = converter.convert()
+                    print(f"Simple converter result: {result}")
+                else:
+                    return jsonify({'error': f'PDF processing failed: {str(e)}'}), 500
         elif SimpleHDFCConverter is not None:
             # Use simple converter as fallback
+            print(f"Using SimpleHDFCConverter fallback for: {temp_pdf_path}")
             converter = SimpleHDFCConverter(temp_pdf_path, temp_dir)
             result = converter.convert()
+            print(f"Simple converter result: {result}")
         else:
             return jsonify({'error': 'PDF processing not available. Please use the command line version.'}), 500
         
