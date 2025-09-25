@@ -78,12 +78,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
+    - name: Install Railway CLI
+      run: |
+        curl -fsSL https://railway.app/install.sh | sh
+        echo "$HOME/.railway/bin" >> $GITHUB_PATH
+    
     - name: Deploy to Railway
-      uses: railwayapp/railway-deploy@v1
-      with:
-        railway-token: ${{ secrets.RAILWAY_TOKEN }}
-        service: web
-        detach: true
+      run: |
+        railway login --token ${{ secrets.RAILWAY_TOKEN }}
+        railway up --service web
+      env:
+        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
     
     - name: Wait for deployment
       run: |
@@ -92,8 +97,14 @@ jobs:
     
     - name: Test deployed application
       run: |
-        # Get Railway URL from environment or use the known URL
+        # Test both Railway subdomain and custom domain
         RAILWAY_URL="https://web-production-5925.up.railway.app"
-        echo "Testing deployed application at $RAILWAY_URL"
+        CUSTOM_DOMAIN="https://pdf2csv.in"
+        
+        echo "Testing Railway subdomain at $RAILWAY_URL"
         curl -f "$RAILWAY_URL/health" || exit 1
-        echo "Deployment successful!"
+        
+        echo "Testing custom domain at $CUSTOM_DOMAIN"
+        curl -f "$CUSTOM_DOMAIN/health" || exit 1
+        
+        echo "Deployment successful! Both domains are working."
