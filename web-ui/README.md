@@ -85,7 +85,7 @@ To contribute to the web UI:
 
 - **GitHub Issues**: [Report bugs or request features](https://github.com/vishwaraja/hdfc-pdf-converter/issues)
 - **Email**: vishwaraja.pathi@adiyogitech.com
-- **Technical Article**: [Read the full story on Dev.to](https://dev.to/34c6)
+- **Technical Article**: [Read the full story on Dev.to](https://dev.to/vishwaraja_pathivishwa/building-a-pdf-parser-for-hdfc-bank-statements-from-165-pages-to-csv-in-minutes-34c6)
 
 ---
 
