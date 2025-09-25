@@ -162,6 +162,10 @@ def download_file(session_id, file_type):
 def health():
     return jsonify({'status': 'healthy', 'converter_available': HDFCConverter is not None})
 
+@app.route('/')
+def root():
+    return jsonify({'message': 'HDFC PDF Converter API is running', 'status': 'healthy'})
+
 if __name__ == '__main__':
     print("Starting HDFC PDF Converter Web Backend...")
     print(f"HDFCConverter available: {HDFCConverter is not None}")
