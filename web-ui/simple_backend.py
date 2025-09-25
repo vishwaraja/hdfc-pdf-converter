@@ -14,7 +14,8 @@ def root():
     return jsonify({
         'message': 'HDFC PDF Converter API is running',
         'status': 'healthy',
-        'version': '1.0.0'
+        'version': '1.0.1',
+        'deployment': 'fixed'
     })
 
 @app.route('/health')
