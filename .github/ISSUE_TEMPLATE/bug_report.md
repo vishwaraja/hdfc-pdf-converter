@@ -25,17 +25,12 @@ If applicable, add screenshots to help explain your problem.
 
 **Environment (please complete the following information):**
  - OS: [e.g. Windows, macOS, Linux]
- - Python version: [e.g. 3.8, 3.9, 3.10]
- - HDFC PDF Converter version: [e.g. 1.0.0]
-
-**PDF Information (if applicable):**
- - PDF file size: [e.g. 2.5MB]
- - Number of pages: [e.g. 50]
- - PDF creation date: [e.g. 2024-01-15]
- - Any password protection: [Yes/No]
+ - Browser [e.g. chrome, safari]
+ - Version [e.g. 22]
+ - PDF file size and pages (if applicable)
 
 **Additional context**
 Add any other context about the problem here.
 
-**Error Log**
-If there's an error, please paste the relevant log output here.
+**Error logs**
+If applicable, paste any error logs or console output here.

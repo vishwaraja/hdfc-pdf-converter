@@ -1,0 +1,8 @@
+# Global code owners - require approval for all changes
+* @vishwarajapathi
+
+# Specific file owners
+/.github/ @vishwarajapathi
+/Dockerfile @vishwarajapathi
+/railway.json @vishwarajapathi
+/Procfile @vishwarajapathi

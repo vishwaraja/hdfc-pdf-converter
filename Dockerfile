@@ -34,6 +34,9 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
+# Install ghostscript Python bindings
+RUN pip install --no-cache-dir ghostscript
+
 # Copy requirements first for better caching
 COPY web-ui/requirements.txt .
 
@@ -48,7 +51,7 @@ ENV PYTHONPATH=/app/src:/app/web-ui
 ENV FLASK_APP=web-ui/app.py
 
 # Expose port
-EXPOSE 8080
+EXPOSE 5000
 
 # Run the application
-CMD ["cd", "web-ui", "&&", "python", "app.py"]
+CMD ["python", "web-ui/app.py"]

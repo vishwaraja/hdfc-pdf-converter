@@ -16,11 +16,12 @@ A clear and concise description of what you want to happen.
 **Describe alternatives you've considered**
 A clear and concise description of any alternative solutions or features you've considered.
 
-**Use case**
-Describe the specific use case for this feature. Who would benefit from it?
-
 **Additional context**
 Add any other context or screenshots about the feature request here.
 
-**Implementation ideas (optional)**
-If you have ideas about how this could be implemented, please share them here.
+**Implementation considerations**
+- [ ] This feature requires changes to the PDF parsing logic
+- [ ] This feature requires changes to the web UI
+- [ ] This feature requires changes to the Docker configuration
+- [ ] This feature requires changes to the CI/CD pipeline
+- [ ] This feature requires new dependencies

@@ -47,6 +47,34 @@ ALLOWED_EXTENSIONS = {'pdf'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def process_with_timeout(func, timeout_seconds=120):
+    """Process a function with a timeout using threading."""
+    import threading
+    import time
+    
+    result = [None]
+    exception = [None]
+    
+    def target():
+        try:
+            result[0] = func()
+        except Exception as e:
+            exception[0] = e
+    
+    thread = threading.Thread(target=target)
+    thread.daemon = True
+    thread.start()
+    thread.join(timeout_seconds)
+    
+    if thread.is_alive():
+        # Thread is still running, timeout occurred
+        raise TimeoutError("PDF processing timed out")
+    
+    if exception[0]:
+        raise exception[0]
+    
+    return result[0]
+
 @app.route('/')
 def index():
     return send_file('index.html')
@@ -79,21 +107,31 @@ def upload_file():
         file.save(temp_pdf_path)
         
         # Process the PDF using our converter
+        print(f"HDFCConverter available: {HDFCConverter is not None}")
+        print(f"SimpleHDFCConverter available: {SimpleHDFCConverter is not None}")
+        
         if HDFCConverter is not None:
             # Use full converter if available
             print("Using full HDFCConverter for PDF processing")
             try:
+                print("Creating HDFCConverter instance...")
                 converter = HDFCConverter(temp_pdf_path, temp_dir)
+                print("HDFCConverter instance created successfully")
+                print("Starting conversion...")
                 result = converter.convert()
-                print("Full converter processing completed")
+                print(f"Full converter result: {result}")
+                if result.get('success'):
+                    print("Full converter processing completed successfully")
+                else:
+                    print(f"Full converter failed: {result.get('error', 'Unknown error')}")
             except Exception as e:
-                print(f"Full converter failed: {type(e).__name__}")
+                print(f"Full converter failed with exception: {type(e).__name__}: {str(e)}")
                 # Fall back to simple converter
                 if SimpleHDFCConverter is not None:
                     print("Falling back to SimpleHDFCConverter")
                     converter = SimpleHDFCConverter(temp_pdf_path, temp_dir)
                     result = converter.convert()
-                    print("Simple converter processing completed")
+                    print(f"Simple converter result: {result}")
                 else:
                     return jsonify({'error': f'PDF processing failed: {str(e)}'}), 500
         elif SimpleHDFCConverter is not None:
@@ -101,7 +139,7 @@ def upload_file():
             print("Using SimpleHDFCConverter fallback for PDF processing")
             converter = SimpleHDFCConverter(temp_pdf_path, temp_dir)
             result = converter.convert()
-            print("Simple converter processing completed")
+            print(f"Simple converter result: {result}")
         else:
             return jsonify({'error': 'PDF processing not available. Please use the command line version.'}), 500
         
