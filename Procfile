@@ -1,1 +1,1 @@
-web: cd web-ui && python backend.py
+web: cd web-ui && python app.py
