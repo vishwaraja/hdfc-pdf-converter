@@ -68,9 +68,9 @@ The web UI is designed to be easily customizable:
 
 ## 🚀 Deployment
 
-This web UI is automatically deployed to GitHub Pages when you push to the main branch. The live demo is available at:
+The web UI is deployed with the backend server on Railway. The live demo is available at:
 
-**https://vishwaraja.github.io/hdfc-pdf-converter/**
+**https://pdf2csv.in**
 
 ## 🤝 Contributing
 
