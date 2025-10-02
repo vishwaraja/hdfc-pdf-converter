@@ -183,6 +183,7 @@ hdfc-pdf-converter/
 │   ├── CONTRIBUTING.md       # Contribution guidelines
 │   ├── CODE_OF_CONDUCT.md    # Code of conduct
 │   ├── CI_CD_SETUP.md        # CI/CD setup guide
+│   ├── DEPLOYMENT.md         # Deployment architecture
 │   ├── INSTALLATION.md       # Installation guide
 │   └── USAGE.md              # Usage documentation
 ├── scripts/                   # Utility scripts
@@ -215,12 +216,42 @@ pip install -r requirements.txt
 python -m pytest tests/
 ```
 
+## 🚀 Deployment
+
+This project is deployed on [Railway](https://railway.app) at [https://pdf2csv.in](https://pdf2csv.in).
+
+For detailed deployment architecture and configuration options, see the [Deployment Guide](docs/DEPLOYMENT.md).
+
+**Note:** This project uses Railway for deployment, not Kubernetes or Kong API Gateway. If you're looking for Kong/Kubernetes deployment information, please refer to the deployment guide for alternatives.
+
+## ❓ FAQ
+
+### Does this project use Kong API Gateway or Kubernetes?
+
+**No.** This project is deployed on Railway, which provides:
+- Direct Flask application exposure
+- Built-in SSL/TLS and health checks
+- Automatic deployments and scaling
+- Custom domain support
+
+The Kong Helm chart v2.52.0 ConfigMap mounting issues mentioned in some discussions **do not apply** to this project. See [DEPLOYMENT.md](docs/DEPLOYMENT.md) for details.
+
+### Why am I getting 400 errors?
+
+400 errors from the API typically mean:
+- No file was uploaded in the request
+- File field is missing or incorrectly named
+- File is not a PDF or exceeds 50MB
+
+See the [Troubleshooting Guide](docs/TROUBLESHOOTING.md) for detailed solutions.
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🆘 Support
 
+- **Troubleshooting**: [Common issues and solutions](docs/TROUBLESHOOTING.md)
 - **GitHub Issues**: [Report bugs or request features](https://github.com/vishwaraja/hdfc-pdf-converter/issues)
 - **Email**: vishwaraja.pathi@adiyogitech.com
 - **Technical Article**: [Read the full story on Dev.to](https://dev.to/vishwaraja_pathivishwa/building-a-pdf-parser-for-hdfc-bank-statements-from-165-pages-to-csv-in-minutes-34c6)
