@@ -215,6 +215,15 @@ pip install -r requirements.txt
 python -m pytest tests/
 ```
 
+## 👥 Contributors
+
+Thank you to all the contributors who have helped make this project better!
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Want to contribute? Check out our [Contributing Guide](docs/CONTRIBUTING.md) to get started!
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
