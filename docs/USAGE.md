@@ -266,10 +266,10 @@ tail -f hdfc_conversion.log
 
 If you encounter issues:
 
-1. Check the [troubleshooting section](#troubleshooting)
+1. Check the [Troubleshooting Guide](TROUBLESHOOTING.md)
 2. Review the log file: `hdfc_conversion.log`
-3. Open an [issue](https://github.com/vishwarajapathi/hdfc-pdf-converter/issues)
-4. Check the [FAQ](FAQ.md)
+3. Open an [issue](https://github.com/vishwaraja/hdfc-pdf-converter/issues)
+4. Review the [Deployment Guide](DEPLOYMENT.md) for deployment-related issues
 
 ## Advanced Features
 

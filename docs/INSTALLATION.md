@@ -225,3 +225,7 @@ pip install -r requirements.txt --upgrade
 # Reinstall the package
 pip install -e .
 ```
+
+## Troubleshooting
+
+If you encounter any issues during installation, see the [Troubleshooting Guide](TROUBLESHOOTING.md) for solutions to common problems.
