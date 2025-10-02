@@ -2,6 +2,8 @@
 
 This document explains the complete CI/CD pipeline setup for the HDFC PDF Converter project.
 
+> **Note:** For deployment architecture and platform details, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
 ## Overview
 
 The CI/CD pipeline ensures:
